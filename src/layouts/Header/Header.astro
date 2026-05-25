@@ -1,6 +1,6 @@
 ---
-import { SITE, LOGO_IMAGE } from '../../config';
-import { Menu, X } from 'lucide-react';
+import { SITE, LOGO_IMAGE, OpportunitiesUrl } from '../../config';
+import { Menu, X, ExternalLink } from 'lucide-react';
 import HeaderMobileMenu from './HeaderMobileMenu.astro';
 import HeaderNavLinks from './HeaderNavLinks.astro';
 import LanguageSwitcher from './LanguageSwitcher.astro';
@@ -42,8 +42,20 @@ const { nav, i18n } = SITE;
       </div>
 
       <!-- Desktop Navigation -->
-      <nav class="hidden lg:flex gap-8 items-center">
+      <nav class="hidden lg:flex gap-6 items-center">
         <HeaderNavLinks items={nav} mode="desktop" />
+        <span class="h-5 w-px bg-[#FF5F05]/20" aria-hidden="true"></span>
+        <a
+          href={OpportunitiesUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 text-sm font-medium text-[#caa668] hover:text-[#c6af89] transition-colors duration-300 whitespace-nowrap"
+     
+          aria-label="Browse Opportunities (opens in a new tab)"
+        >
+          Browse Opportunities
+          <ExternalLink className="w-3.5 h-3.5 shrink-0 opacity-70" />
+        </a>
         {i18n.enabled && <LanguageSwitcher languages={languages} />}
       </nav>
 

@@ -14,6 +14,7 @@ export const ui = {
     'nav.publications': 'Publications',
     'nav.patents': 'Patents',
     'nav.team': 'Team',
+    'nav.opportunities': 'Browse Opportunities',
     'nav.activities': 'Activities',
     'nav.join': 'Join Us',
     'nav.news': 'News',

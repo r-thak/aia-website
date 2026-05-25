@@ -72,6 +72,8 @@ export const DEFAULT_LANG: 'zh' | 'en' | 'ja' | 'ko' | 'fr' | 'de' | 'es' | 'ru'
 
 export const ResourcesUrl = "https://www.notion.so/Resources-31321c93aa7f80c3b556c584cefe4fb2?source=copy_link"
 
+export const OpportunitiesUrl = 'https://alignmentopportunities.vercel.app/'
+
 export const LAYOUT_CONFIG = {
   defaultFooterBg: 'bg-[#0A0F1A]',
   fallbackFooterColor: '#0A0F1A',

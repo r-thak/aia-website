@@ -1,6 +1,8 @@
 ---
 import HeaderNavLinks from './HeaderNavLinks.astro';
 import LanguageSwitcher from './LanguageSwitcher.astro';
+import { OpportunitiesUrl } from '../../config';
+import { ExternalLink } from 'lucide-react';
 
 interface NavItem {
   link: string;
@@ -55,6 +57,17 @@ const {
   <div class="bg-[#0A0F1A]/95 backdrop-blur-xl border-b border-[#FF5F05]/20">
     <nav class="max-h-[calc(100vh-6rem)] overflow-y-auto px-6 py-5 flex flex-col gap-2 custom-scrollbar">
     <HeaderNavLinks items={nav} mode="mobile" />
+    <a
+      href={OpportunitiesUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-1.5 px-4 py-3 text-sm font-medium text-gray-400 hover:text-[#FF5F05] transition-colors duration-300"
+      aria-label="Browse Opportunities (opens in a new tab)"
+      @click="$dispatch('menu-close')"
+    >
+      Browse Opportunities
+      <ExternalLink className="w-3.5 h-3.5 shrink-0 opacity-70" />
+    </a>
     {i18nEnabled && <LanguageSwitcher languages={languages} variant="mobile" />}
     </nav>
   </div>
