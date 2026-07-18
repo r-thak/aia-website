@@ -11,7 +11,7 @@ export const SITE = {
   // Lab Info
   labName: 'AI Alignment @ Illinois',
   university: 'University of Illinois Urbana-Champaign',
-  logo: './assets/aia-logo.png', // Logo path
+  logo: '/assets/aia-logo.png', // Logo path (absolute so it resolves on all routes)
   avatar: './assets/logo-real.svg', // Avatar for SEO/Schema
   email: 'contact@aiaillinois.org', // Placeholder
 
