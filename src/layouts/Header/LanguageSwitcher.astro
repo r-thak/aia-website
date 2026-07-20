@@ -1,0 +1,63 @@
+---
+interface Props {
+  languages: Record<string, string>;
+  variant?: 'desktop' | 'mobile';
+}
+
+const { languages, variant = 'desktop' } = Astro.props;
+const isMobile = variant === 'mobile';
+---
+
+{isMobile ? (
+  <div class="mt-8 pt-6 border-t border-[#FF5F05]/20">
+    <div class="text-sm font-bold text-gray-400 mb-4 uppercase tracking-wider px-2">Language</div>
+    <div class="grid grid-cols-2 gap-3">
+      {Object.entries(languages).map(([code, label]) => (
+        <button
+          class="px-4 py-3 rounded-xl text-base font-medium border border-[#FF5F05]/30 text-gray-300 hover:border-[#FF5F05] hover:text-[#FF5F05] hover:bg-[#FF5F05]/10 transition-all lang-option mobile-lang-option text-center"
+          data-lang={code}
+          @click={`window.setLanguage && window.setLanguage('${code}'); currentLang = '${code.toUpperCase()}'; $dispatch('menu-close')`}
+          :class={`currentLang === '${code.toUpperCase()}' ? 'text-[#FF5F05] bg-[#FF5F05]/10 border-[#FF5F05]' : ''`}
+        >
+          {label}
+        </button>
+      ))}
+    </div>
+  </div>
+) : (
+  <div class="relative ml-2 group">
+    <button
+      class="flex items-center gap-1 px-3 py-2 rounded-lg bg-[#13294B]/30 hover:bg-[#FF5F05]/10 text-gray-300 hover:text-[#FF5F05] transition-all duration-300 outline-none border border-[#FF5F05]/20 hover:border-[#FF5F05]/40"
+      aria-label="Select Language"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M3 12h18" />
+        <path d="M12 3a15 15 0 0 1 0 18" />
+        <path d="M12 3a15 15 0 0 0 0 18" />
+      </svg>
+      <span class="text-xs font-bold uppercase tracking-wider" x-text="currentLang">{Object.keys(languages)[0]?.toUpperCase() || 'EN'}</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="m6 9 6 6 6-6" />
+      </svg>
+    </button>
+
+    <div class="absolute right-0 pt-2 w-40 hidden group-hover:block transform origin-top-right transition-all z-50">
+      <div class="glass rounded-xl py-2">
+        {Object.entries(languages).map(([code, label]) => (
+          <button
+            class="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-[#FF5F05]/10 hover:text-[#FF5F05] transition-colors lang-option flex items-center justify-between group/item"
+            data-lang={code}
+            @click={`window.setLanguage && window.setLanguage('${code}'); currentLang = '${code.toUpperCase()}';`}
+            :class={`currentLang === '${code.toUpperCase()}' ? 'text-[#FF5F05] bg-[#FF5F05]/10' : ''`}
+          >
+            <span>{label}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-[#FF5F05] transition-opacity" :class={`currentLang === '${code.toUpperCase()}' ? 'opacity-100' : 'opacity-0'`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="m5 13 4 4L19 7" />
+            </svg>
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+)}

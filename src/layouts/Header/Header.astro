@@ -1,0 +1,87 @@
+---
+import { SITE, LOGO_IMAGE, OpportunitiesUrl } from '../../config';
+import { Menu, X, ExternalLink } from 'lucide-react';
+import HeaderMobileMenu from './HeaderMobileMenu.astro';
+import HeaderNavLinks from './HeaderNavLinks.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import InteractiveLogo from '../../components/InteractiveLogo';
+
+import { defaultLang, languages } from '../../i18n/ui';
+
+const { nav, i18n } = SITE;
+---
+
+<header
+  class="sticky top-0 z-50 w-full glass-dark transition-all duration-300"
+  x-data={`{ mobileOpen: false, currentLang: '${defaultLang.toUpperCase()}', scrolled: false }`}
+  x-init={`
+    try { currentLang = (localStorage.getItem('preferred-lang') || '${defaultLang}').toUpperCase(); } catch (e) {}
+    window.addEventListener('scroll', () => { scrolled = window.scrollY > 20; });
+  `}
+  @keydown.escape.window="mobileOpen = false"
+  @resize.window="if (window.innerWidth >= 1024) mobileOpen = false"
+  @menu-close.window="mobileOpen = false"
+  @language-change.window="currentLang = (($event.detail && $event.detail.lang) ? $event.detail.lang : '${defaultLang}').toUpperCase()"
+  :class="scrolled ? 'shadow-lg shadow-[#FF5F05]/10 border-b border-[#FF5F05]/30' : 'border-b border-[#FF5F05]/10'"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-24">
+      <!-- Logo & Name -->
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-3" aria-label="Site logo and name">
+          {LOGO_IMAGE.enable && SITE.logo && (
+            <InteractiveLogo client:load src={SITE.logo} alt="Logo" />
+          )}
+
+          <div class="flex flex-col leading-tight">
+            <span class="font-bold text-white text-base md:text-xl leading-tight uppercase tracking-wider">
+              {SITE.labName}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden lg:flex gap-6 items-center">
+        <HeaderNavLinks items={nav} mode="desktop" />
+        <span class="h-5 w-px bg-[#FF5F05]/20" aria-hidden="true"></span>
+        <a
+          href={OpportunitiesUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 text-sm font-medium text-[#caa668] hover:text-[#c6af89] transition-colors duration-300 whitespace-nowrap"
+     
+          aria-label="Browse Opportunities (opens in a new tab)"
+        >
+          Browse Opportunities
+          <ExternalLink className="w-3.5 h-3.5 shrink-0 opacity-70" />
+        </a>
+        {i18n.enabled && <LanguageSwitcher languages={languages} />}
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-btn"
+        class="lg:hidden relative p-2 -mr-2 text-gray-300 hover:text-[#FF5F05] rounded-lg transition-all duration-300 z-[80] group"
+        aria-label="Toggle menu"
+        aria-controls="mobile-menu"
+        x-bind:aria-expanded="mobileOpen.toString()"
+        @click="mobileOpen = !mobileOpen"
+      >
+        <span class="absolute inset-0 rounded-lg bg-[#FF5F05]/0 group-hover:bg-[#FF5F05]/10 transition-colors duration-300"></span>
+        <span class="icon-menu block transition-all duration-300" :class="{ 'rotate-90 opacity-0 scale-0': mobileOpen }">
+          <Menu className="w-6 h-6" />
+        </span>
+        <span class="icon-close absolute inset-0 flex items-center justify-center transition-all duration-300" :class="mobileOpen ? 'rotate-0 opacity-100 scale-100' : 'rotate-90 opacity-0 scale-0'">
+          <X className="w-6 h-6" />
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <HeaderMobileMenu
+    nav={nav}
+    i18nEnabled={i18n.enabled}
+    languages={languages}
+  />
+</header>

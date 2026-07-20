@@ -1,0 +1,74 @@
+---
+import HeaderNavLinks from './HeaderNavLinks.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { OpportunitiesUrl } from '../../config';
+import { ExternalLink } from 'lucide-react';
+
+interface NavItem {
+  link: string;
+  key: string;
+  text: string;
+}
+
+interface Props {
+  nav: NavItem[];
+  i18nEnabled: boolean;
+  languages: Record<string, string>;
+}
+
+const {
+  nav,
+  i18nEnabled,
+  languages,
+} = Astro.props;
+---
+
+<!-- Faded page backdrop when menu is open -->
+<div
+  class="fixed inset-0 top-24 z-[90] bg-[#0A0F1A]/60 backdrop-blur-sm lg:hidden"
+  x-cloak
+  x-show="mobileOpen"
+  x-transition:enter="transition ease-out duration-200"
+  x-transition:enter-start="opacity-0"
+  x-transition:enter-end="opacity-100"
+  x-transition:leave="transition ease-in duration-150"
+  x-transition:leave-start="opacity-100"
+  x-transition:leave-end="opacity-0"
+  @click="$dispatch('menu-close')"
+  aria-hidden="true"
+></div>
+
+<div
+  id="mobile-menu"
+  class="absolute left-0 right-0 top-full z-[100] lg:hidden"
+  x-cloak
+  x-show="mobileOpen"
+  x-transition:enter="transition ease-out duration-200"
+  x-transition:enter-start="opacity-0"
+  x-transition:enter-end="opacity-100"
+  x-transition:leave="transition ease-in duration-150"
+  x-transition:leave-start="opacity-100"
+  x-transition:leave-end="opacity-0"
+  role="dialog" 
+  aria-modal="true" 
+  :aria-hidden="(!mobileOpen).toString()" 
+  aria-labelledby="mobile-menu-title"
+>
+  <div class="bg-[#0A0F1A]/95 backdrop-blur-xl border-b border-[#FF5F05]/20">
+    <nav class="max-h-[calc(100vh-6rem)] overflow-y-auto px-6 py-5 flex flex-col gap-2 custom-scrollbar">
+    <HeaderNavLinks items={nav} mode="mobile" />
+    <a
+      href={OpportunitiesUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-1.5 px-4 py-3 text-sm font-medium text-gray-400 hover:text-[#FF5F05] transition-colors duration-300"
+      aria-label="Browse Opportunities (opens in a new tab)"
+      @click="$dispatch('menu-close')"
+    >
+      Browse Opportunities
+      <ExternalLink className="w-3.5 h-3.5 shrink-0 opacity-70" />
+    </a>
+    {i18nEnabled && <LanguageSwitcher languages={languages} variant="mobile" />}
+    </nav>
+  </div>
+</div>

@@ -7,11 +7,14 @@ export const defaultLang = DEFAULT_LANG;
 export const ui = {
   en: {
     'nav.home': 'Home',
+    'nav.get_involved': 'Get Involved',
+    'nav.events': 'Events',
     'nav.research': 'Research',
     'nav.achievements': 'Achievements',
     'nav.publications': 'Publications',
     'nav.patents': 'Patents',
     'nav.team': 'Team',
+    'nav.opportunities': 'Browse Opportunities',
     'nav.activities': 'Activities',
     'nav.join': 'Join Us',
     'nav.news': 'News',
@@ -99,6 +102,8 @@ export const ui = {
   },
   zh: {
     'nav.home': '首页',
+    'nav.get_involved': '参与我们',
+    'nav.events': '活动',
     'nav.research': '研究方向',
     'nav.achievements': '科研成果',
     'nav.publications': '学术论文',
@@ -186,6 +191,8 @@ export const ui = {
   },
   ja: {
     'nav.home': 'ホーム',
+    'nav.get_involved': '参加する',
+    'nav.events': 'イベント',
     'nav.research': '研究',
     'nav.achievements': '業績',
     'nav.publications': '論文',
@@ -265,6 +272,8 @@ export const ui = {
   },
   ko: {
     'nav.home': '홈',
+    'nav.get_involved': '참여하기',
+    'nav.events': '이벤트',
     'nav.research': '연구',
     'nav.achievements': '성과',
     'nav.publications': '출판물',
@@ -344,6 +353,8 @@ export const ui = {
   },
   fr: {
     'nav.home': 'Accueil',
+    'nav.get_involved': 'S\'impliquer',
+    'nav.events': 'Événements',
     'nav.research': 'Recherche',
     'nav.achievements': 'Réalisations',
     'nav.publications': 'Publications',
@@ -423,6 +434,8 @@ export const ui = {
   },
   de: {
     'nav.home': 'Startseite',
+    'nav.get_involved': 'Mitmachen',
+    'nav.events': 'Veranstaltungen',
     'nav.research': 'Forschung',
     'nav.achievements': 'Leistungen',
     'nav.publications': 'Publikationen',
@@ -502,6 +515,8 @@ export const ui = {
   },
   es: {
     'nav.home': 'Inicio',
+    'nav.get_involved': 'Involúcrate',
+    'nav.events': 'Eventos',
     'nav.research': 'Investigación',
     'nav.achievements': 'Logros',
     'nav.publications': 'Publicaciones',
@@ -581,6 +596,8 @@ export const ui = {
   },
   ru: {
     'nav.home': 'Главная',
+    'nav.get_involved': 'Присоединиться',
+    'nav.events': 'События',
     'nav.research': 'Исследования',
     'nav.achievements': 'Достижения',
     'nav.publications': 'Публикации',
@@ -665,7 +682,10 @@ export function getLangFromUrl(url: URL) {
 }
 
 export function useTranslations(lang: keyof typeof ui) {
-  return function t(key: keyof typeof ui[typeof defaultLang]) {
-    return ui[lang][key] || ui[defaultLang][key];
+  const current = ui[lang] as Record<string, string>;
+  const fallback = ui[defaultLang] as Record<string, string>;
+
+  return function t(key: string) {
+    return current[key] || fallback[key] || key;
   }
 }

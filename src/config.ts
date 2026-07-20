@@ -1,5 +1,3 @@
-import heroImage from './assets/hero-image-2026.jpg';
-
 export const SITE = {
   website: 'https://aia-illinois.netlify.app/', // TODO: Update with actual URL if known
   author: 'AI Alignment @ Illinois',
@@ -13,8 +11,8 @@ export const SITE = {
   // Lab Info
   labName: 'AI Alignment @ Illinois',
   university: 'University of Illinois Urbana-Champaign',
-  logo: '/assets/aia-logo.png', // Logo path
-  avatar: '/assets/logo-real.svg', // Avatar for SEO/Schema
+  logo: '/assets/aia-logo.png', // Logo path (absolute so it resolves on all routes)
+  avatar: './assets/logo-real.svg', // Avatar for SEO/Schema
   email: 'contact@aiaillinois.org', // Placeholder
 
   // Hero Section (Home Page)
@@ -22,20 +20,21 @@ export const SITE = {
     title: 'AI Alignment @ Illinois',
     subtitle: 'A community at UIUC of researchers, philosophers, and builders focused on safe, aligned, and human-centered artificial intelligence',
     action: 'Join Now',
-    image: heroImage,
+    image: './assets/hero-image-2026.jpg',
   },
 
   // Navigation
   nav: [
     { text: 'Home', link: '/', key: 'home' },
     { text: 'Get Involved', link: '/spring-2026', key: 'get_involved' },
-
-    { text: 'Team', link: '/about', key: 'team' },
+    { text: 'Team', link: '/team', key: 'team' },
     { text: 'Events', link: '/events', key: 'events' },
   ],
 
   // Custom Pages
-  customPages: [],
+  customPages: [
+    { text: 'Resources', link: '/resources', key: 'resources' },
+  ],
 
   // i18n Config
   i18n: {
@@ -69,3 +68,14 @@ export const SOCIALS = [
 
 // Default language configuration
 export const DEFAULT_LANG: 'zh' | 'en' | 'ja' | 'ko' | 'fr' | 'de' | 'es' | 'ru' = 'en';
+
+
+export const ResourcesUrl = "https://www.notion.so/Resources-31321c93aa7f80c3b556c584cefe4fb2?source=copy_link"
+
+export const OpportunitiesUrl = 'https://alignmentopportunities.vercel.app/'
+
+export const LAYOUT_CONFIG = {
+  defaultFooterBg: 'bg-[#0A0F1A]',
+  fallbackFooterColor: '#0A0F1A',
+  ogSupportedPages: ['index', 'research', 'team', 'publications', 'news', 'join'] as const,
+};

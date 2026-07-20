@@ -1,0 +1,56 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { Users, Sparkles } from 'lucide-react';
+import TeamCard from '../components/TeamCard.astro';
+import { GradientText, FadeIn } from '../components/AnimatedText';
+import { FloatingOrbs } from '../components/AuroraBackground';
+
+const team = (await getCollection('team')).sort((a, b) => a.data.weight - b.data.weight);
+---
+
+<Layout title="About Us">
+  <div class="relative min-h-screen text-white overflow-hidden">
+    <!-- Background effects -->
+    <div class="absolute inset-0 pointer-events-none">
+      <FloatingOrbs client:load />
+    </div>
+
+    <section class="relative py-24 px-4">
+      <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-16">
+          <!-- <FadeIn client:load> -->
+            <!-- <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FF5F05]/10 border border-[#FF5F05]/30 mb-8">
+              <Users className="w-4 h-4 text-[#FF5F05]" />
+              <span class="text-sm font-medium text-[#FF5F05] uppercase tracking-wider">Our Team</span>
+            </div> -->
+          <!-- </FadeIn> -->
+
+          <!-- <FadeIn client:load delay={50}> -->
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 uppercase tracking-tight">
+              Club <GradientText client:load text="Organizers" />
+            </h1>
+          <!-- </FadeIn> -->
+
+          <!-- <FadeIn client:load delay={100}> -->
+            <!-- <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+              Meet the dedicated team driving AI safety education and research at UIUC
+            </p> -->
+          <!-- </FadeIn> -->
+        </div>
+        
+        <!-- Team Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+          {team.map((member, index) => (
+            // <FadeIn client:load delay={index * 5} className="w-full flex justify-center">
+              <div class="w-full max-w-md">
+                <TeamCard member={member} />
+              </div>
+            // </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

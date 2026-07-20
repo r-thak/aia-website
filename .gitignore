@@ -39,3 +39,6 @@ coverage/
 
 # Vercel
 .vercel/
+
+# archived/superseded scratch components
+/archive

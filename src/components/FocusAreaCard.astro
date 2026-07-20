@@ -1,0 +1,27 @@
+---
+interface Props {
+  title: string;
+  open?: boolean;
+}
+
+const { title, open = false } = Astro.props;
+---
+
+<details class="group glass rounded-2xl overflow-hidden card-hover" open={open}>
+  <summary class="flex justify-between items-center px-7 py-6 md:px-8 md:py-7 cursor-pointer list-none">
+    <div class="flex items-center gap-4">
+      <div class="p-2.5 rounded-xl bg-[#FF5F05]/20 shrink-0">
+        <slot name="icon" />
+      </div>
+      <span class="text-lg md:text-xl font-black text-white group-hover:text-[#FF5F05] transition-colors uppercase tracking-wide">
+        {title}
+      </span>
+    </div>
+    <span class="transition-transform duration-300 group-open:rotate-180 text-[#FF5F05] ml-4 shrink-0">
+      <slot name="chevron" />
+    </span>
+  </summary>
+  <div class="px-7 md:px-8 pb-7 md:pb-8 text-base md:text-lg text-gray-400 leading-relaxed border-t border-[#FF5F05]/10 pt-6">
+    <slot />
+  </div>
+</details>

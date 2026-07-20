@@ -1,42 +1,157 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { BookOpen, Link as LinkIcon, Headphones, ExternalLink, Sparkles } from 'lucide-react';
+import { GradientText, FadeIn } from '../components/AnimatedText';
+import { FloatingOrbs } from '../components/AuroraBackground';
 ---
 
 <Layout title="Resources">
-  <div class="bg-[#13294B] min-h-screen text-white pb-20">
-    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
-      <h1 class="text-4xl md:text-5xl font-bold text-white mb-12 text-center">Resources</h1>
+  <div class="relative min-h-screen text-white overflow-hidden">
+    <!-- Background effects -->
+    <div class="absolute inset-0 pointer-events-none">
+      <FloatingOrbs client:load />
+    </div>
+
+    <section class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <!-- Header -->
+      <div class="text-center mb-16">
+        <FadeIn client:load>
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FF5F05]/10 border border-[#FF5F05]/30 mb-8">
+            <BookOpen className="w-4 h-4 text-[#FF5F05]" />
+            <span class="text-sm font-medium text-[#FF5F05] uppercase tracking-wider">Learn More</span>
+          </div>
+        </FadeIn>
+
+        <FadeIn client:load delay={100}>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 uppercase tracking-tight">
+            <GradientText client:load text="Resources" />
+          </h1>
+        </FadeIn>
+
+        <FadeIn client:load delay={200}>
+          <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+            Curated resources to deepen your understanding of AI safety and alignment
+          </p>
+        </FadeIn>
+      </div>
       
-      <div class="space-y-12 text-gray-200">
-        <div>
-          <h3 class="text-2xl font-bold text-[#ff8c69] mb-4">Organizations</h3>
-          <ul class="list-disc pl-5 space-y-2 text-lg">
-            <li>Aggregated list: <a href="https://www.aisafety.com/" class="text-[#ff8c69] hover:underline hover:text-white transition-colors" target="_blank">aisafety.com</a></li>
-            <li>Kairos: <a href="https://kairos-project.org/" class="text-[#ff8c69] hover:underline hover:text-white transition-colors" target="_blank">kairos-project.org</a></li>
-            <li>SPAR: <a href="https://sparai.org/" class="text-[#ff8c69] hover:underline hover:text-white transition-colors" target="_blank">sparai.org</a></li>
-          </ul>
-        </div>
+      <div class="space-y-8">
+        <!-- Organizations -->
+        <FadeIn client:load delay={100}>
+          <div class="glass rounded-2xl p-8 card-hover">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="p-3 rounded-xl bg-[#FF5F05]/20">
+                <LinkIcon className="w-6 h-6 text-[#FF5F05]" />
+              </div>
+              <h3 class="text-2xl font-black text-white uppercase tracking-wide">Organizations</h3>
+            </div>
+            <ul class="space-y-4">
+              <li>
+                <a href="https://www.aisafety.com/" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-2 text-gray-400 hover:text-[#FF5F05] transition-colors">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#FF5F05]/50 group-hover:bg-[#FF5F05] transition-colors"></span>
+                  Aggregated list: <span class="text-[#FF5F05] group-hover:underline">aisafety.com</span>
+                  <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </a>
+              </li>
+              <li>
+                <a href="https://kairos-project.org/" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-2 text-gray-400 hover:text-[#FF5F05] transition-colors">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#FF5F05]/50 group-hover:bg-[#FF5F05] transition-colors"></span>
+                  Kairos: <span class="text-[#FF5F05] group-hover:underline">kairos-project.org</span>
+                  <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </a>
+              </li>
+              <li>
+                <a href="https://sparai.org/" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-2 text-gray-400 hover:text-[#FF5F05] transition-colors">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#FF5F05]/50 group-hover:bg-[#FF5F05] transition-colors"></span>
+                  SPAR: <span class="text-[#FF5F05] group-hover:underline">sparai.org</span>
+                  <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </a>
+              </li>
+            </ul>
+          </div>
+        </FadeIn>
 
-         <div>
-          <h3 class="text-2xl font-bold text-[#ff8c69] mb-4">Reading List</h3>
-          <ul class="list-disc pl-5 space-y-2 text-lg">
-             <li>Superintelligence: Paths, Dangers, and Strategies by Nick Bostrom</li>
-             <li>Gödel, Escher, Bach: an Eternal Golden Braid by Douglas Hofstadter</li>
-             <li>The Last Question (short story) by Isaac Asimov</li>
-             <li>Nick Bostrom essays: <a href="https://nickbostrom.com/" class="text-[#ff8c69] hover:underline hover:text-white transition-colors" target="_blank">nickbostrom.com</a></li>
-             <li>AI 2027 forecast: <a href="https://ai-2027.com/" class="text-[#ff8c69] hover:underline hover:text-white transition-colors" target="_blank">ai-2027.com</a></li>
-             <li>The Network State: <a href="https://thenetworkstate.com/" class="text-[#ff8c69] hover:underline hover:text-white transition-colors" target="_blank">thenetworkstate.com</a></li>
-          </ul>
-        </div>
+        <!-- Reading List -->
+        <FadeIn client:load delay={200}>
+          <div class="glass rounded-2xl p-8 card-hover">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="p-3 rounded-xl bg-[#FF5F05]/20">
+                <BookOpen className="w-6 h-6 text-[#FF5F05]" />
+              </div>
+              <h3 class="text-2xl font-black text-white uppercase tracking-wide">Reading List</h3>
+            </div>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-2 text-gray-400">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#FF5F05]/50 mt-2 shrink-0"></span>
+                <span><strong class="text-white">Superintelligence: Paths, Dangers, and Strategies</strong> by Nick Bostrom</span>
+              </li>
+              <li class="flex items-start gap-2 text-gray-400">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#FF5F05]/50 mt-2 shrink-0"></span>
+                <span><strong class="text-white">Gödel, Escher, Bach: an Eternal Golden Braid</strong> by Douglas Hofstadter</span>
+              </li>
+              <li class="flex items-start gap-2 text-gray-400">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#FF5F05]/50 mt-2 shrink-0"></span>
+                <span><strong class="text-white">The Last Question</strong> (short story) by Isaac Asimov</span>
+              </li>
+              <li>
+                <a href="https://nickbostrom.com/" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-2 text-gray-400 hover:text-[#FF5F05] transition-colors">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#FF5F05]/50 group-hover:bg-[#FF5F05] transition-colors"></span>
+                  Nick Bostrom essays: <span class="text-[#FF5F05] group-hover:underline">nickbostrom.com</span>
+                  <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </a>
+              </li>
+              <li>
+                <a href="https://ai-2027.com/" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-2 text-gray-400 hover:text-[#FF5F05] transition-colors">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#FF5F05]/50 group-hover:bg-[#FF5F05] transition-colors"></span>
+                  AI 2027 forecast: <span class="text-[#FF5F05] group-hover:underline">ai-2027.com</span>
+                  <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </a>
+              </li>
+              <li>
+                <a href="https://thenetworkstate.com/" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-2 text-gray-400 hover:text-[#FF5F05] transition-colors">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#FF5F05]/50 group-hover:bg-[#FF5F05] transition-colors"></span>
+                  The Network State: <span class="text-[#FF5F05] group-hover:underline">thenetworkstate.com</span>
+                  <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </a>
+              </li>
+            </ul>
+          </div>
+        </FadeIn>
 
-        <div>
-           <h3 class="text-2xl font-bold text-[#ff8c69] mb-4">Podcasts & Channels</h3>
-           <ul class="list-disc pl-5 space-y-2 text-lg">
-             <li><a href="https://open.spotify.com/playlist/2UV0dokGfpfQ9e29aeKcSO" class="text-[#ff8c69] hover:underline hover:text-white transition-colors" target="_blank">Philosophy podcasts on Spotify</a></li>
-             <li><a href="https://youtube.com/playlist?list=PLrAXtmErZgOdP_8GztsuKi9nrraNbKKp4" class="text-[#ff8c69] hover:underline hover:text-white transition-colors" target="_blank">Lex Fridman Podcast</a></li>
-             <li><a href="https://youtube.com/@ycombinator" class="text-[#ff8c69] hover:underline hover:text-white transition-colors" target="_blank">Y Combinator startup school</a></li>
-           </ul>
-        </div>
+        <!-- Podcasts & Channels -->
+        <FadeIn client:load delay={300}>
+          <div class="glass rounded-2xl p-8 card-hover">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="p-3 rounded-xl bg-[#FF5F05]/20">
+                <Headphones className="w-6 h-6 text-[#FF5F05]" />
+              </div>
+              <h3 class="text-2xl font-black text-white uppercase tracking-wide">Podcasts & Channels</h3>
+            </div>
+            <ul class="space-y-4">
+              <li>
+                <a href="https://open.spotify.com/playlist/2UV0dokGfpfQ9e29aeKcSO" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-2 text-gray-400 hover:text-[#FF5F05] transition-colors">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#FF5F05]/50 group-hover:bg-[#FF5F05] transition-colors"></span>
+                  <span class="text-[#FF5F05] group-hover:underline">Philosophy podcasts on Spotify</span>
+                  <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </a>
+              </li>
+              <li>
+                <a href="https://youtube.com/playlist?list=PLrAXtmErZgOdP_8GztsuKi9nrraNbKKp4" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-2 text-gray-400 hover:text-[#FF5F05] transition-colors">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#FF5F05]/50 group-hover:bg-[#FF5F05] transition-colors"></span>
+                  <span class="text-[#FF5F05] group-hover:underline">Lex Fridman Podcast</span>
+                  <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </a>
+              </li>
+              <li>
+                <a href="https://youtube.com/@ycombinator" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-2 text-gray-400 hover:text-[#FF5F05] transition-colors">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#FF5F05]/50 group-hover:bg-[#FF5F05] transition-colors"></span>
+                  <span class="text-[#FF5F05] group-hover:underline">Y Combinator startup school</span>
+                  <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </a>
+              </li>
+            </ul>
+          </div>
+        </FadeIn>
       </div>
     </section>
   </div>
